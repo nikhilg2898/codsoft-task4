@@ -1,0 +1,97 @@
+<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FeelBuy❤️ - Shop by Emotion</title>
+<style>
+body{font-family:Arial, sans-serif;margin:0;background:#f7f6f4;color:#222;text-align:center}
+header{background:#222;color:#fff;padding:15px;font-size:22px;letter-spacing:1px}
+.moods{margin:20px}
+button{background:#e26b5a;border:none;color:#fff;padding:10px 18px;border-radius:8px;margin:5px;cursor:pointer}
+button:hover{background:#222}
+.products{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;margin:20px}
+.item{background:#fff;width:200px;padding:10px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:transform .3s}
+.item:hover{transform:scale(1.03)}
+img{width:100%;border-radius:8px;height:180px;object-fit:cover}
+.price{color:#e26b5a;font-weight:bold}
+#cart{position:fixed;bottom:20px;right:20px;background:#fff;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.1);padding:15px;width:200px;text-align:left}
+footer{background:#222;color:#fff;padding:10px;margin-top:30px;font-size:14px}
+</style>
+</head>
+<body>
+<header>🛍️ FeelBuy❤️ - Shop by Emotion</header>
+<div class="moods">
+<button onclick="showProducts('happy')">😊 Happy</button>
+<button onclick="showProducts('calm')">🌿 Calm</button>
+<button onclick="showProducts('creative')">🎨 Creative</button>
+</div>
+<div id="productList" class="products"></div>
+<div id="cart">
+<strong>Your Cart:</strong>
+<div id="cartItems"></div>
+<p>Total: ₹<span id="total">0</span></p>
+</div>
+<footer>© 2025 FeelBuy❤️ | designed by Nikhil</footer>
+<script>
+const products={
+  happy:[
+    {
+      name:"Smiley Mug",
+      price:299,
+      img:"https://images.pexels.com/photos/360713/pexels-photo-360713.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      name:"Joy Candle",
+      price:199,
+      img:"https://images.pexels.com/photos/9002405/pexels-photo-9002405.jpeg?auto=compress&cs=tinysrgb&w=600"
+    }
+  ],
+  calm:[
+    {
+      name:"Zen Plant",
+      price:349,
+      img:"https://images.pexels.com/photos/3076899/pexels-photo-3076899.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      name:"Peace Journal",
+      price:259,
+      img:"https://images.pexels.com/photos/941572/pexels-photo-941572.jpeg?auto=compress&cs=tinysrgb&w=600"
+    }
+  ],
+  creative:[
+    {
+      name:"Art Brush Set",
+      price:499,
+      img:"https://images.pexels.com/photos/3777876/pexels-photo-3777876.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      name:"DIY Lamp Kit",
+      price:399,
+      img:"https://images.pexels.com/photos/716658/pexels-photo-716658.jpeg?auto=compress&cs=tinysrgb&w=600"
+    }
+  ]
+};
+let total=0;
+function showProducts(mood){
+  const container=document.getElementById("productList");
+  container.innerHTML="";
+  products[mood].forEach(item=>{
+    const div=document.createElement("div");
+    div.className="item";
+    div.innerHTML=`<img src="${item.img}" alt="${item.name}"><h3>${item.name}</h3><p class='price'>₹${item.price}</p><button onclick="addToCart('${item.name}',${item.price})">Add to Cart</button>`;
+    container.appendChild(div);
+  });
+}
+function addToCart(name,price){
+  const cart=document.getElementById("cartItems");
+  const item=document.createElement("p");
+  item.textContent=`${name} - ₹${price}`;
+  cart.appendChild(item);
+  total+=price;
+  document.getElementById("total").textContent=total;
+}
+showProducts('happy');
+</script>
+</body>
+</html>
